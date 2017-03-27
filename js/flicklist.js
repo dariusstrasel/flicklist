@@ -1,5 +1,4 @@
 
-
 var model = {
   watchlistItems: [],
   browseItems: []
@@ -46,9 +45,7 @@ function discoverMovies(callback) {
  */
 function render() {
     console.log("renderInvoked()");
-  // TODO 7
-  // clear everything from both lists
-  // TODO 6
+
 
   // for each movie on the user's watchlist, insert a list item into the <ul> in the watchlist section
   // for each movie on the current browse list
@@ -60,7 +57,9 @@ function render() {
       movieButton.click(function () {
           movie_object = movie;
           console.log("Adding", movie_object.original_title, "to WatchList.");
-          model.watchlistItems.push(movie_object.original_title);
+          if (!(movie_object.original_title in model.watchlistItems)) {
+            model.watchlistItems.push(movie_object.original_title);
+          }
           render();
       });
 
@@ -70,15 +69,9 @@ function render() {
   model.watchlistItems.forEach(function (movie) {
       var movie_name = movie;
       var movieElement = $("<li>" + movie_name + "</li>");
-      // var movieButton = $("<button>Remove from Watchlist</button>");
       $('#section-watchlist').children('ul').append(movieElement);
-
-      // movieButton.click(function () {
-      //     movie_object = movie;
-      //     model.watchlistItems.pop(movie_object.original_title);
-      //     render();
-      // });
   });
+
   model.browseItems = [];
   model.watchlistItems = [];
   }
