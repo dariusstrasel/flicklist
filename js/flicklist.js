@@ -3,24 +3,21 @@
 var model = {
   watchlistItems: [],
   browseItems: []
-}
+};
 
 
 var api = {
 
   root: "https://api.themoviedb.org/3",
-  token: "TODO", // TODO 0 add your api key
+  token: "8e888fa39ec243e662e1fb738c42ae99",
 
   /**
    * Given a movie object, returns the url to its poster image
    */
   posterUrl: function(movie) {
-    // TODO 4b
-    // implement this function
-
-    return "http://images5.fanpop.com/image/photos/25100000/movie-poster-rapunzel-and-eugene-25184488-300-450.jpg" 
+    return "http://image.tmdb.org/t/p/w300//" + movie.poster_path;
   }
-}
+};
 
 
 /**
@@ -76,41 +73,48 @@ function render() {
 
   // insert watchlist items
   model.watchlistItems.forEach(function(movie) {
-    var title = $("<h6></h6>").text(movie.original_title);
+    var title = $("<h6></h6>")
+        .text(movie.original_title);
 
-    // TODO 1 
-    // add an "I watched it" button and append it below the title
-    // Clicking should remove this movie from the watchlist and re-render
+    var button = $("<button></button>")
+        .text("I watched it.")
+        .attr("class", "btn btn-danger")
+        .click(function removeFromWatchList(){
+            console.log(movie);
+            model.watchlistItems.splice(movie);
+            render();
+    });
 
-    // TODO 2i
-    // apply the classes "btn btn-danger" to the "I watched it button"
+    var itemView_poster = $("<img>")
+        .attr("src", api.posterUrl(movie))
+        .attr("class", "img-responsive");
 
-    // TODO 4a
-    // add a poster image and append it inside the 
-    // panel body above the button
+    var itemView_heading = $("<div></div>")
+        .append(title, itemView_poster)
+        .attr("class", "panel-heading");
 
-    // TODO 2g
-    // re-implement the li as a bootstrap panel with a heading and a body
+    var itemView_body = $("<div></div>")
+        .append(button)
+        .attr("class", "panel-body");
+
     var itemView = $("<li></li>")
-      .append(title)
-      .attr("class", "item-watchlist");
+      .append(itemView_heading, itemView_body)
+      .attr("class", "panel panel-default watchlist-item");
+
+
 
     $("#section-watchlist ul").append(itemView);
   });
 
+
   // insert browse items
   model.browseItems.forEach(function(movie) {
-
-    // TODO 2d continued
-    // style this list item to look like the demo
-    // You'll also need to make changes in index.html.
-    // use the following BS classes:
-    // "list-group", "list-group-item", btn", "btn-primary", 
 
     var title = $("<h4></h4>").text(movie.original_title);
 
     var button = $("<button></button>")
       .text("Add to Watchlist")
+      .attr("class", "btn btn-primary")
       .click(function() {
         model.watchlistItems.push(movie);
         render();
@@ -121,12 +125,15 @@ function render() {
 
     // append everything to itemView, along with an <hr/>
     var itemView = $("<li></li>")
+      .attr("class", "list-group-item")
       .append(title)
       .append(overview)
       .append(button);
       
     // append the itemView to the list
-    $("#section-browse ul").append(itemView);
+    $("#section-browse ul")
+        .attr("class", "list-group")
+        .append(itemView);
   });
   
 }
