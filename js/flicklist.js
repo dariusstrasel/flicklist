@@ -16,7 +16,7 @@ var api = {
     var baseImageUrl = "http://image.tmdb.org/t/p/w300/";
     return baseImageUrl + movie.poster_path; 
   }
-}
+};
 
 
 /**
@@ -58,10 +58,11 @@ function searchMovies(callback, query) {
     },
 
     success: function(response) {
+      console.log(typeof response);
       var keywordIDS = response.results.map(function(item){return item.id});
       var keywordStrings = keywordIDS.join("|");
       console.log(keywordStrings);
-      // console.log(response);
+
       discoverMovies(callback, keywordStrings);
     }
   });
