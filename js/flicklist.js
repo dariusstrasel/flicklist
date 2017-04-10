@@ -27,7 +27,7 @@ var api = {
  * Makes an AJAX request to themoviedb.org, asking for some movies
  *
  * if successful, updates the model.browseItems appropriately, and then invokes
- * the callback function that was passed in
+ * the callback function that was passed ingit
  */
 
 function discoverMovies(callback, keywords) {
