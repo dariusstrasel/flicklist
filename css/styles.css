@@ -1,41 +1,40 @@
 
 
-
-
 .jumbotron {
 	text-align: center;
 	margin-bottom: 1%;
 }
 
-
 #section-watchlist li {
 	padding: 0px;
 	margin: 0px 4% 4% 0px;
-	width: 140px;
+	width: 160px;
 }
 
+#browse-carousel {
+	max-width: 300px;
+	margin: auto;
+}
 
 #section-watchlist li button {
 	width: 100%;
 	margin-top: 10px;
 }
 
-
-#section-watchlist ul {
-	text-align: center;
+#section-browse ul {
+	padding-left: 0px;
 }
-
 
 .main-content {
 	color: gray;
 }
 
-#section-browse {
-	background: black;
+.well {
+	border-width: 0px;
 }
 
-#section-browse form {
-	margin-bottom: 2%;
+#section-browse {
+	background: black;
 }
 
 section header {
@@ -44,4 +43,8 @@ section header {
 
 section {
 	padding: 2%;
+}
+
+#add-to-watchlist {
+	width: 100%
 }
